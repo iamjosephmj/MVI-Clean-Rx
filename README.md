@@ -25,6 +25,7 @@ better understanding of the `GithubJobsApp`.
 * [Introduction](#Introduction)
 * [Dependencies](#Dependencies)
 * [The Concept](#The-Concept)
+    * [Intents](#Intents)
 
 ## Introduction
 
@@ -64,4 +65,13 @@ with the javascript framework named <a href ="https://cycle.js.org/">`Cycle.js`<
   <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/blob/main/images/user.jpg" />
 </p>
 
-On of the key insights within Cycle.js and the MVI pattern is adding the user into the structure of the software. 
+On of the key insights within Cycle.js and the MVI pattern is adding the user into the structure of the software. Much of the code we write in 
+web and mobile are heavily user focused, as opposed to being processing-intensive. The code presents and interface that both accepts user inputs 
+and shows resulting output. But the place the user in architectures like MVP and MVVM are not entirely transparent. In many ways, the user id kind of 
+a view in those patterns. But in MVI, the user takes a central role in terms of expressing their intents.   
+
+### Intents
+In Android, the term Intent has a very specific meaning being a class in an android SDK. Intents are what we, as Android developers, to bond 
+different components in the Android system. We use them to start activities and services, pass data to components like broadcast receivers. All Android developers 
+are well-versed in the use of the intent class for these and other purposes. However, the world Intent in MVI is <b>totally unrelated</b> to the use of 
+the class named Intent in in Android SDK.Intent in MVI is more closely thought of as Intention.  
