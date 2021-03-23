@@ -17,7 +17,7 @@ This shares ancestry with MVC just like MVP and MVVM
 But MVP and MVVM are both a little more like MVC... MVP has <b>Presenter</b> class, MVVM has a <b>ViewModel</b> class. Each of these classes take on similar 
 responsibility like the <b>Controller</b> of MVC, the only difference is in the way in which <b>Presenter</b>/<b>ViewModel</b> communicate to 
 the other layers of the architecture. In this Repo I had sketched out GitHubJobs app with MVI, all the clean architecture layers are the 
-same with our previous repo, please refer to <a href ="https://github.com/iamjosephmj/Rx-Clean">`Rx-Clean`</a> to get a 
+same like we have in our previous repo, please refer to <a href ="https://github.com/iamjosephmj/Rx-Clean">`Rx-Clean`</a> to get a 
 better understanding of the `GithubJobsApp`.
 
 # Table Of Contents
