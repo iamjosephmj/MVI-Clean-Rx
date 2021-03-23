@@ -24,6 +24,7 @@ better understanding of the `GithubJobsApp`.
 
 * [Introduction](#Introduction)
 * [Dependencies](#Dependencies)
+* [The Concept](#The-Concept)
 
 ## Introduction
 
@@ -42,7 +43,6 @@ MVVM. Buckle up! lets dive in...
 
 ## Dependencies
 
-
 * <a href="https://dagger.dev/">`Dagger2`</a>
 * <a href="https://github.com/sockeqwe/AdapterDelegates">`AdapterDelegates`</a>
 * <a href="https://github.com/ReactiveX/RxKotlin">`RxKotlin`</a>
@@ -52,4 +52,16 @@ MVVM. Buckle up! lets dive in...
 * <a href="https://github.com/willowtreeapps/spruce-android">`spruce-android`</a>
 * <a href="https://github.com/bumptech/glide">`Glide`</a>
 
+## The Concept
 
+Many of the advancements made in the software development in the past few years have come from the web development world. 
+Examples include tools and patterns like <a href = "https://reactjs.org/">`React`</a> and <a href="https://facebook.github.io/flux/">`Flux`</a>. These 
+new tools tend to favour a functional programming approach to software development and rethought the way in which you manage the immutable state. 
+They also use an event driven design, which fits in quite nicely with the UX of mobile apps. MVI was created in the webWorld and is closely associated 
+with the javascript framework named <a href ="https://cycle.js.org/">`Cycle.js`</a> created by <a href="https://staltz.com/">`Andre Staltz`</a>
+
+<p align="center">
+  <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/blob/main/images/user.jpg" />
+</p>
+
+On of the key insights within Cycle.js and the MVI pattern is adding the user into the structure of the software. 
