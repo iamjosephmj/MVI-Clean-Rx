@@ -23,5 +23,33 @@ better understanding of the `GithubJobsApp`.
 # Table Of Contents
 
 * [Introduction](#Introduction)
+* [Dependencies](#Dependencies)
 
 ## Introduction
+
+MVI architecture introduces some new ideas that are not present on the other architectures that we use now-a-days. 
+
+* <b>Unidirectional</b> Data Flow.
+* <b>Immutable</b> State ( this is a lifesaver in most of the cases).
+* User is Everywhere(user as a function :)).
+
+Moving forward, we can see that the MVI architecture is a bit more involved than the other architectures, But its unique nature 
+helps us to simplify the flow of information and events in the APP. In other words, it can lead to an architecture that's more comprehensible, maintainable 
+and bugFree :) approach.
+
+MVI provides a systematic approach to adding features into our apps. Due to this benefits, many Android Dev teams are now choosing MVI over MVP and 
+MVVM. Buckle up! lets dive in...
+
+## Dependencies
+
+
+* <a href="https://dagger.dev/">`Dagger2`</a>
+* <a href="https://github.com/sockeqwe/AdapterDelegates">`AdapterDelegates`</a>
+* <a href="https://github.com/ReactiveX/RxKotlin">`RxKotlin`</a>
+* <a href="https://developer.android.com/topic/libraries/architecture/viewmodel">`ViewModels`</a>
+* <a href="https://github.com/square/moshi">`Moshi`</a>
+* <a href="https://github.com/airbnb/lottie-android">`lottie-android`</a>
+* <a href="https://github.com/willowtreeapps/spruce-android">`spruce-android`</a>
+* <a href="https://github.com/bumptech/glide">`Glide`</a>
+
+
