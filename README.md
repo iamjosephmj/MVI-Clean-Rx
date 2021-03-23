@@ -1,4 +1,8 @@
 
+<p align="center">
+  <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/images/mvi-intro.png" />
+</p>
+
 
 # MVI-Clean-Rx (Work In Progress)
 
@@ -7,5 +11,5 @@ This shares ancestry with MVC just like MVP and MVVM
 
 
 <p align="center">
-  <img src="https://github.com/iamjosephmj/Rx-Clean/blob/master/repo-res/images/clean.png" />
+  <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/images/mvi-inh.png" />
 </p>
