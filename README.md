@@ -129,6 +129,6 @@ and the loop continues.
 
 - View wil have INTENTS reception and RENDER logic
 - ViewModel will have :
-* Intent - Action Conversion
-* Action - Result Conversion
-* Result - State Reduction.
+  * Intent - Action Conversion
+  * Action - Result Conversion
+  * Result - State Reduction.
