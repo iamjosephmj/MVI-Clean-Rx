@@ -116,7 +116,7 @@ user in interacting with the software. This process of combining results with th
 passed along to the view of the app which renders the state for the display to the user. In this way state is completely immutable. ie. It is 
 never updated, but instead, it is just recalculated and passed along to the view for rendering.
 
-" ON OF THE MAJOR SOURCES OF THE BUGS IN ANY KIND OF IS MUTABLE STATE " - Joseph James (that's me :)
+" ON OF THE MAJOR SOURCES OF THE BUGS IN ANY KIND OF IS MUTABLE STATE " - Joseph James (that's me :) )
 
 So, by using Immutable state in this way in MVI, you have eliminated the source of many possible bugs from your app development projects.
 
