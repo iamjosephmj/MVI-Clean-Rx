@@ -180,3 +180,9 @@ We also need the ViewModel to process the intents and provide states that the vi
 to provide intents to the ViewModel and be able to render new states. from the viewModel. So, lets also create 
 interfaces for ViewModel and Views.
 
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIAction.kt">`MVIAction`</a>
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIIntent.kt">`MVIIntent`</a>
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIResult.kt">`MVIResult`</a>
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIView.kt">`MVIView`</a>
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIViewModel.kt">`MVIViewModel`</a>
+* <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIViewState.kt">`MVIViewState`</a>
