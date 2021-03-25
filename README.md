@@ -29,6 +29,9 @@ better understanding of the `GithubJobsApp`.
     * [Looking Further into MVI](#Looking-Further-into-MVI)
     * [State And Immutable State](#State-And-Immutable-State)
     * [How to fit MVI in MVVM](#How-to-fit-MVI-in-MVVM)
+* [Insights on Sealed classes](#Insights-on-Sealed-classes)  
+* [How does Rx fit in MVI](#How-does-Rx-fit-in-MVI)  
+
 
 ## Introduction
 
@@ -132,3 +135,25 @@ and the loop continues.
   * Intent - Action Conversion
   * Action - Result Conversion
   * Result - State Reduction.
+
+### Insights on Sealed classes
+
+You can think of sealed classes as an advanced form of Enum, This let you define a limited hierarchy 
+of classes that can be used in kotlin when expressions in a similar way to enums. Unlike enums, you can create 
+multiple instances of sealed class sub type. 
+
+### How does Rx fit in MVI
+
+We had discussed the theory behind MVI, from that you can imagine how streams of RxJava observables 
+fit naturally onto the unidirectional flow of MVI.
+
+* User Intents gets packaged into Observable Streams
+* This flow into actions
+* interacts with repo
+* then flows into Result
+* then reduced to State.
+
+You can think of the unidirectional flow as a stream of observables going round and round as the user 
+interacts with you app ( moment of truth guys :) ).
+
+Now we are all set to start.
