@@ -31,6 +31,7 @@ better understanding of the `GithubJobsApp`.
     * [How to fit MVI in MVVM](#How-to-fit-MVI-in-MVVM)
 * [Insights on Sealed classes](#Insights-on-Sealed-classes)  
 * [How does Rx fit in MVI](#How-does-Rx-fit-in-MVI)  
+* [MVI base interfaces](#MVI-base-interfaces)  
 
 
 ## Introduction
@@ -136,13 +137,13 @@ and the loop continues.
   * Action - Result Conversion
   * Result - State Reduction.
 
-### Insights on Sealed classes
+## Insights on Sealed classes
 
 You can think of sealed classes as an advanced form of Enum, This let you define a limited hierarchy 
 of classes that can be used in kotlin when expressions in a similar way to enums. Unlike enums, you can create 
 multiple instances of sealed class sub type. 
 
-### How does Rx fit in MVI
+## How does Rx fit in MVI
 
 We had discussed the theory behind MVI, from that you can imagine how streams of RxJava observables 
 fit naturally onto the unidirectional flow of MVI.
@@ -157,3 +158,25 @@ You can think of the unidirectional flow as a stream of observables going round 
 interacts with you app ( moment of truth guys :) ).
 
 Now we are all set to start.
+
+## MVI base interfaces
+
+<p align="center">
+  <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/blob/main/images/mvi-base.png" />
+</p>
+
+The flow of events around the MVI cycle consists of intents, actions, results and state. We want to be able to 
+send these type of entities around using Rx Observables and will create base interfaces to represent each type.
+
+The specific items will implement the corresponding interfaces in order to be tagged as that type.
+
+For instance, We will use `MVIIntent` Interface in the above diagram to represent all user intents.
+
+<p align="center">
+  <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/blob/main/images/viewmodel-counterpart.png" />
+</p>
+
+We also need the ViewModel to process the intents and provide states that the views can observe, the View needs 
+to provide intents to the ViewModel and be able to render new states. from the viewModel. So, lets also create 
+interfaces for ViewModel and Views.
+
