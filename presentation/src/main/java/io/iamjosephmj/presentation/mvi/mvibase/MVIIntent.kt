@@ -23,6 +23,6 @@
 *
 */
 
-package io.iamjosephmj.presentation.mvibase
+package io.iamjosephmj.presentation.mvi.mvibase
 
-interface MVIViewState
+interface MVIIntent

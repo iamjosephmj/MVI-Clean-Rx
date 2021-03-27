@@ -23,22 +23,18 @@
 *
 */
 
-package io.iamjosephmj.mvi_rx_clean.di.module
+package io.iamjosephmj.presentation.mvi.mvibase
 
-import androidx.lifecycle.ViewModelProviders
-import dagger.Module
-import dagger.Provides
-import io.iamjosephmj.mvi_rx_clean.di.ActivityScope
-import io.iamjosephmj.mvi_rx_clean.ui.base.BaseActivity
-import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
+import io.reactivex.Observable
 
-@Module
-class ActivityModule(private val activity: BaseActivity<*>) {
+interface MVIView<I : MVIIntent, S : MVIViewState> {
+    /**
+     * Intents from the ViewModel
+     */
+    fun intents(): Observable<I>
 
-    @ActivityScope
-    @Provides
-    fun providesJobsViewModel(): JobsViewModel {
-        return ViewModelProviders.of(activity).get(JobsViewModel::class.java)
-    }
-
+    /**
+     * State to be rendered in the UI.
+     */
+    fun render(state: S)
 }

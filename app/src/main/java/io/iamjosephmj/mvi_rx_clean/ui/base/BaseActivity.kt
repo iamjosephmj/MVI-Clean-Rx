@@ -32,6 +32,7 @@ import io.iamjosephmj.mvi_rx_clean.application.MVIRxCleanApplication
 import io.iamjosephmj.mvi_rx_clean.di.component.ActivityComponent
 import io.iamjosephmj.mvi_rx_clean.di.component.DaggerActivityComponent
 import io.iamjosephmj.mvi_rx_clean.di.module.ActivityModule
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
@@ -42,6 +43,9 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: VM
+
+    @Inject
+    lateinit var compositeDisposable: CompositeDisposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(buildActivityComponent())
@@ -71,4 +75,9 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     //start UI initialization
     protected abstract fun setupView(savedInstanceState: Bundle?)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
+    }
 }

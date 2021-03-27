@@ -23,18 +23,6 @@
 *
 */
 
-package io.iamjosephmj.presentation.mvibase
+package io.iamjosephmj.presentation.mvi.mvibase
 
-import io.reactivex.Observable
-
-interface MVIViewModel<I : MVIIntent, S : MVIViewState> {
-    /**
-     * Process Intents coming from View.
-     */
-    fun processIntent(intent: Observable<I>)
-
-    /**
-     * Provides a stream of states for the view to observe.
-     */
-    fun states(): Observable<S>
-}
+interface  MVIResult

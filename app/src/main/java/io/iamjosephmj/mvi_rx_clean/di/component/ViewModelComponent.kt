@@ -28,7 +28,7 @@ package io.iamjosephmj.mvi_rx_clean.di.component
 import dagger.Component
 import io.iamjosephmj.mvi_rx_clean.di.ViewModelScope
 import io.iamjosephmj.mvi_rx_clean.di.module.ViewModelModule
-import io.iamjosephmj.clean.ui.viewmodels.JobsViewModel
+import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
 
 @ViewModelScope
 @Component(

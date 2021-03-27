@@ -68,4 +68,5 @@ dependencies {
 
     implementation coreDependencies.appCompat
     implementation uiDependencies.material
+    implementation uiDependencies.swipeRefresh
     implementation uiDependencies.constraintlayout}

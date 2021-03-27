@@ -33,20 +33,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.willowtreeapps.spruce.Spruce.SpruceBuilder
 import com.willowtreeapps.spruce.animation.DefaultAnimations
 import com.willowtreeapps.spruce.sort.LinearSort
+import io.iamjosephmj.core.domain.SearchRequest
+import io.iamjosephmj.mvi_rx_clean.R
 import io.iamjosephmj.mvi_rx_clean.di.component.ActivityComponent
 import io.iamjosephmj.mvi_rx_clean.ui.base.BaseActivity
-import io.iamjosephmj.mvi_rx_clean.ui.screens.actions.Actions
 import io.iamjosephmj.mvi_rx_clean.ui.screens.adapter.jobsAdapter
-import io.iamjosephmj.clean.ui.viewmodels.JobsViewModel
-import io.iamjosephmj.mvi_rx_clean.R
+import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
+import io.iamjosephmj.presentation.mvi.intents.GitHubLoadJobsIntent
+import io.iamjosephmj.presentation.mvi.mvibase.MVIView
+import io.iamjosephmj.presentation.mvi.viewstate.GitHubJobsViewState
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
  * This is the Activity that displays the list of jobs.
  */
-class JobsActivity : BaseActivity<JobsViewModel>() {
-
+class JobsActivity : BaseActivity<JobsViewModel>(), MVIView<GitHubLoadJobsIntent, GitHubJobsViewState> {
+    //TODO : You can add a clear button and call the clear all intent to see the UI state change.
     lateinit var animationBuilder: SpruceBuilder
 
     var animateList = true
@@ -60,9 +65,46 @@ class JobsActivity : BaseActivity<JobsViewModel>() {
     override fun setupView(savedInstanceState: Bundle?) {
         initRecyclerView()
         initSpruce()
-        initObservers()
+        initSwipeRefresh()
+        initViewModelRxBindings()
+        startApiCall()
     }
 
+    private fun initSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener {
+            animateList = true
+            loadJobsIntent.onNext(
+                GitHubLoadJobsIntent.GitHubLoadWithData( SearchRequest(
+                    domain = "Android",
+                    page = 1
+                )))
+        }
+    }
+
+    private fun startApiCall() {
+        loadJobsIntent.onNext(
+            GitHubLoadJobsIntent.GitHubLoadWithData(
+                SearchRequest(
+                    domain = "Android",
+                    page = 1
+                )
+            )
+        )
+    }
+
+    /**
+     * This methods binds the intent objects with the viewModel
+     */
+    private fun initViewModelRxBindings() {
+        compositeDisposable.add(
+            viewModel.states().subscribe(this::render)
+        )
+        viewModel.processIntent(intents())
+    }
+
+    /**
+     * This module is used to initialize the recycler view starting animations.
+     */
     private fun initSpruce() {
         animationBuilder =
             SpruceBuilder(jobsRecyclerView)
@@ -76,36 +118,6 @@ class JobsActivity : BaseActivity<JobsViewModel>() {
                     DefaultAnimations.dynamicTranslationUpwards(jobsRecyclerView),
                     DefaultAnimations.dynamicFadeIn(jobsRecyclerView)
                 )
-    }
-
-    /**
-     * This method is used to register livedata with viewModels to do UI operation.
-     */
-    @SuppressLint("NotifyDataSetChanged")
-    private fun initObservers() {
-        viewModel.jobsLiveData.observe(this, {
-            when (it.type) {
-                Actions.SUCCESS -> {
-                    loadingView.visibility = View.INVISIBLE
-                    jobsRecyclerView.visibility = View.VISIBLE
-                    errorView.visibility = View.INVISIBLE
-                    jobsAdapter.items = it.data
-                    jobsAdapter.notifyDataSetChanged()
-                }
-                Actions.LOADING -> {
-                    loadingView.visibility = View.VISIBLE
-                    jobsRecyclerView.visibility = View.INVISIBLE
-                    errorView.visibility = View.INVISIBLE
-                }
-                Actions.ERROR -> {
-                    errorView.frame = 0
-                    loadingView.visibility = View.INVISIBLE
-                    jobsRecyclerView.visibility = View.INVISIBLE
-                    errorView.visibility = View.VISIBLE
-                    errorView.playAnimation()
-                }
-            }
-        })
     }
 
     /**
@@ -127,5 +139,43 @@ class JobsActivity : BaseActivity<JobsViewModel>() {
         jobsRecyclerView.adapter = jobsAdapter
     }
 
+    override fun intents(): Observable<GitHubLoadJobsIntent> {
+        return Observable.merge(
+            loadJobsIntent,
+            clearJobsIntent
+        )
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun render(state: GitHubJobsViewState) {
+        when {
+            state.isLoading -> {
+                if(!swipeRefreshLayout.isRefreshing) {
+                    loadingView.visibility = View.VISIBLE
+                    jobsRecyclerView.visibility = View.INVISIBLE
+                    errorView.visibility = View.INVISIBLE
+                }
+            }
+            state.error != null -> {
+                errorView.frame = 0
+                loadingView.visibility = View.INVISIBLE
+                jobsRecyclerView.visibility = View.INVISIBLE
+                errorView.visibility = View.VISIBLE
+                errorView.playAnimation()
+            }
+            else -> {
+                loadingView.visibility = View.INVISIBLE
+                jobsRecyclerView.visibility = View.VISIBLE
+                errorView.visibility = View.INVISIBLE
+                jobsAdapter.items = state.jobList
+                jobsAdapter.notifyDataSetChanged()
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
+    }
+
+    private var loadJobsIntent = PublishSubject.create<GitHubLoadJobsIntent.GitHubLoadWithData>()
+
+    private val clearJobsIntent = PublishSubject.create<GitHubLoadJobsIntent.ClearAllJobsGitHub>()
 
 }

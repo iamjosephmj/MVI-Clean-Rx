@@ -23,6 +23,12 @@
 *
 */
 
-package io.iamjosephmj.presentation.mvibase
+package io.iamjosephmj.presentation.mvi.action
 
-interface MVIIntent
+import io.iamjosephmj.core.domain.SearchRequest
+import io.iamjosephmj.presentation.mvi.mvibase.MVIAction
+
+sealed class GithubLoadJobsAction : MVIAction {
+    data class GithubLoadJobs(val searchRequest: SearchRequest) : GithubLoadJobsAction()
+    object ClearAllJobsGithub : GithubLoadJobsAction()
+}

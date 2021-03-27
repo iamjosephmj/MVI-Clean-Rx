@@ -18,6 +18,7 @@ ext {
     def rxAdapter = "2.4.0"
     def interceptor = "4.2.1"
     def moshiConverter = "2.5.0"
+    def swipeRefresh = "1.1.0"
 
 
     coreDependencies = [
@@ -69,7 +70,10 @@ ext {
             material        :
                     "com.google.android.material:material:$material",
             constraintlayout:
-                    "androidx.constraintlayout:constraintlayout:$constraintlayout"
+                    "androidx.constraintlayout:constraintlayout:$constraintlayout",
+            swipeRefresh    :
+                    "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefresh"
+
 
     ]
 

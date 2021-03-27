@@ -23,61 +23,101 @@
 *
 */
 
-package io.iamjosephmj.clean.ui.viewmodels
+package io.iamjosephmj.mvi_rx_clean.ui.viewmodels
 
 import io.iamjosephmj.mvi_rx_clean.di.component.ViewModelComponent
 import io.iamjosephmj.mvi_rx_clean.ui.base.BaseViewModel
-import io.iamjosephmj.mvi_rx_clean.ui.screens.actions.Actions
-import io.iamjosephmj.mvi_rx_clean.ui.screens.actions.JobsLiveData
-import io.iamjosephmj.clean.util.SchedulerProvider
-import io.iamjosephmj.core.data.repo.GitHubJobsRepository
-import io.iamjosephmj.core.domain.SearchRequest
-import io.iamjosephmj.core.interactors.Interactors
-import io.reactivex.rxkotlin.subscribeBy
+import io.iamjosephmj.presentation.mvi.action.GithubLoadJobsAction
+import io.iamjosephmj.presentation.mvi.intents.GitHubLoadJobsIntent
+import io.iamjosephmj.presentation.mvi.mvibase.MVIViewModel
+import io.iamjosephmj.presentation.mvi.processor.GitHubJobsProcessorHolder
+import io.iamjosephmj.presentation.mvi.results.GitHubJobsResult
+import io.iamjosephmj.presentation.mvi.viewstate.GitHubJobsViewState
+import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
+import io.reactivex.functions.BiFunction
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 /**
  * This ViewModel is specifically used for implementing the jobsFetch-display operations in this project.
  */
-class JobsViewModel : BaseViewModel() {
+class JobsViewModel : BaseViewModel(), MVIViewModel<GitHubLoadJobsIntent, GitHubJobsViewState> {
 
     @Inject
-    lateinit var repository: GitHubJobsRepository
+    lateinit var actionProcessorHolder: GitHubJobsProcessorHolder
 
     @Inject
-    lateinit var interactor: Interactors
+    lateinit var intentSubjectsGitHub: PublishSubject<GitHubLoadJobsIntent>
 
-    @Inject
-    lateinit var schedulerProvider: SchedulerProvider
+    private val stateObservable: Observable<GitHubJobsViewState> = compose()
 
-    @Inject
-    lateinit var jobsLiveData: JobsLiveData
+    private fun compose(): Observable<GitHubJobsViewState> {
+        return intentSubjectsGitHub
+//            .compose(intentFilter)
+            .map(this::actionFromIntent)
+            .compose(actionProcessorHolder.actionProcessor)
+            .scan(GitHubJobsViewState.default(), reducer)
+            .distinctUntilChanged()
+            .replay(1)
+            .autoConnect(0)
+    }
+
+    private val intentFilterGitHub: ObservableTransformer<GitHubLoadJobsIntent, GitHubLoadJobsIntent>
+        get() = ObservableTransformer { intents ->
+            intents.publish { shared ->
+                Observable.merge(
+                    shared.ofType(GitHubLoadJobsIntent.GitHubLoadWithData::class.java).take(1),
+                    shared.ofType(GitHubLoadJobsIntent.ClearAllJobsGitHub::class.java).take(1)
+                )
+
+            }
+        }
+
+    private fun actionFromIntent(intentGitHub: GitHubLoadJobsIntent): GithubLoadJobsAction {
+        return when (intentGitHub) {
+            is GitHubLoadJobsIntent.GitHubLoadWithData -> GithubLoadJobsAction.GithubLoadJobs(intentGitHub.searchRequest)
+            is GitHubLoadJobsIntent.ClearAllJobsGitHub -> GithubLoadJobsAction.ClearAllJobsGithub
+        }
+    }
 
     override fun injectDependencies(viewModelComponent: ViewModelComponent) {
         viewModelComponent.inject(this)
     }
 
     override fun onStart() {
-        startApiCall()
     }
 
-    private fun startApiCall() {
-        val req = SearchRequest(1, "android")
-        compositeDisposable.add(
-            interactor.searchForJobs(req)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .subscribeBy(
-                    onSuccess = { result ->
-                        jobsLiveData.type = Actions.SUCCESS
-                        jobsLiveData.data = result
-                        jobsLiveData.value = jobsLiveData
-                    },
-                    onError = {
-                        jobsLiveData.type = Actions.ERROR
-                        jobsLiveData.value = jobsLiveData
-                    }
-                )
-        )
+    override fun processIntent(intentGitHub: Observable<GitHubLoadJobsIntent>) {
+        intentGitHub.subscribe(intentSubjectsGitHub)
+
     }
+
+    override fun states(): Observable<GitHubJobsViewState> = stateObservable
+
+    companion object {
+        private val reducer =
+            BiFunction { previousViewState: GitHubJobsViewState, result: GitHubJobsResult ->
+                when (result) {
+                    is GitHubJobsResult.LoadAllJobs.Loading ->
+                        previousViewState.copy(
+                            isLoading = true,
+                            jobList = ArrayList(),
+                            error = null
+                        )
+                    is GitHubJobsResult.LoadAllJobs.Error ->
+                        previousViewState.copy(
+                            isLoading = false,
+                            error = result.error
+                        )
+                    is GitHubJobsResult.LoadAllJobs.Success ->
+                        previousViewState.copy(
+                            isLoading = false,
+                            error = null,
+                            jobList = result.jobsList
+                        )
+                }
+            }
+    }
+
 }

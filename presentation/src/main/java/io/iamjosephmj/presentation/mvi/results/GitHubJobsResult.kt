@@ -23,6 +23,15 @@
 *
 */
 
-package io.iamjosephmj.presentation.mvibase
+package io.iamjosephmj.presentation.mvi.results
 
-interface MVIAction
+import io.iamjosephmj.core.domain.GitHubJobDescription
+import io.iamjosephmj.presentation.mvi.mvibase.MVIResult
+
+sealed class GitHubJobsResult : MVIResult {
+    sealed class LoadAllJobs : GitHubJobsResult() {
+        object Loading : LoadAllJobs()
+        data class Success(val jobsList: List<GitHubJobDescription>) : LoadAllJobs()
+        data class Error(val error: Throwable) : LoadAllJobs()
+    }
+}

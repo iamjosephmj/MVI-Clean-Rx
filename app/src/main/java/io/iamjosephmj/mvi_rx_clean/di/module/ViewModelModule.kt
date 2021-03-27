@@ -27,13 +27,25 @@ package io.iamjosephmj.mvi_rx_clean.di.module
 
 import dagger.Module
 import dagger.Provides
-import io.iamjosephmj.mvi_rx_clean.ui.screens.actions.JobsLiveData
+import io.iamjosephmj.clean.util.SchedulerProvider
+import io.iamjosephmj.core.interactors.Interactors
+import io.iamjosephmj.presentation.mvi.intents.GitHubLoadJobsIntent
+import io.iamjosephmj.presentation.mvi.processor.GitHubJobsProcessorHolder
+import io.reactivex.subjects.PublishSubject
 
 @Module
 class ViewModelModule {
 
     @Provides
-    fun providesJobsLiveData(): JobsLiveData {
-        return JobsLiveData()
+    fun providesIntentSubjects(): PublishSubject<GitHubLoadJobsIntent> {
+        return PublishSubject.create()
+    }
+
+    @Provides
+    fun providesGitHubJobsProcessorHolder(
+        interactors: Interactors,
+        schedulerProvider: SchedulerProvider
+    ): GitHubJobsProcessorHolder {
+        return GitHubJobsProcessorHolder(interactors, schedulerProvider)
     }
 }

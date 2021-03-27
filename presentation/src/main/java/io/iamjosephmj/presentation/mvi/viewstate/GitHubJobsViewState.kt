@@ -23,6 +23,22 @@
 *
 */
 
-package io.iamjosephmj.presentation.mvibase
+package io.iamjosephmj.presentation.mvi.viewstate
 
-interface  MVIResult
+import io.iamjosephmj.core.domain.GitHubJobDescription
+import io.iamjosephmj.presentation.mvi.mvibase.MVIViewState
+
+data class GitHubJobsViewState(
+    val isLoading: Boolean,
+    val jobList: List<GitHubJobDescription>,
+    val error: Throwable?
+) : MVIViewState {
+    companion object {
+        fun default(): GitHubJobsViewState = GitHubJobsViewState(
+            isLoading = true,
+            jobList = ArrayList(),
+            error = null
+        )
+    }
+
+}

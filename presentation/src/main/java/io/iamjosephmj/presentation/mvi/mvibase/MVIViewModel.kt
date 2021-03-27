@@ -23,18 +23,18 @@
 *
 */
 
-package io.iamjosephmj.mvi_rx_clean.ui.screens.actions
+package io.iamjosephmj.presentation.mvi.mvibase
 
-import androidx.lifecycle.MutableLiveData
-import io.iamjosephmj.core.domain.GitHubJobDescription
+import io.reactivex.Observable
 
-/**
- * This is the livedata that drives the complete UI.
- */
-class JobsLiveData : MutableLiveData<JobsLiveData>() {
+interface MVIViewModel<I : MVIIntent, S : MVIViewState> {
+    /**
+     * Process Intents coming from View.
+     */
+    fun processIntent(intent: Observable<I>)
 
-    var data: List<GitHubJobDescription> = mutableListOf()
-
-    var type: Actions = Actions.LOADING
-
+    /**
+     * Provides a stream of states for the view to observe.
+     */
+    fun states(): Observable<S>
 }

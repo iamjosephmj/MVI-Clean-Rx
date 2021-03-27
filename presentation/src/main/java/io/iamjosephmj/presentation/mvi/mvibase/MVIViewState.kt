@@ -23,11 +23,6 @@
 *
 */
 
-package io.iamjosephmj.mvi_rx_clean.ui.screens.actions
+package io.iamjosephmj.presentation.mvi.mvibase
 
-/**
- * This enum is for distinguishing actions in UI.
- */
-enum class Actions {
-    LOADING, ERROR, SUCCESS
-}
+interface MVIViewState

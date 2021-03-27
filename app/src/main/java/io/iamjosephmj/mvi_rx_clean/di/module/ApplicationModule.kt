@@ -29,16 +29,17 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import io.iamjosephmj.mvi_rx_clean.application.MVIRxCleanApplication
-import io.iamjosephmj.mvi_rx_clean.di.ApplicationContext
 import io.iamjosephmj.clean.util.CleanRxSchedulerProvider
 import io.iamjosephmj.clean.util.SchedulerProvider
 import io.iamjosephmj.core.data.repo.GitHubJobsRepository
 import io.iamjosephmj.core.interactors.Interactors
 import io.iamjosephmj.core.interactors.SearchForJobs
+import io.iamjosephmj.mvi_rx_clean.application.MVIRxCleanApplication
+import io.iamjosephmj.mvi_rx_clean.di.ApplicationContext
 import io.iamjosephmj.networking.service.GitHubJobAPIService
 import io.iamjosephmj.networking.service.base.RetrofitService
 import io.iamjosephmj.presentation.framework.GitHubJobsDataSourceImpl
+import io.iamjosephmj.presentation.mvi.processor.GitHubJobsProcessorHolder
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 

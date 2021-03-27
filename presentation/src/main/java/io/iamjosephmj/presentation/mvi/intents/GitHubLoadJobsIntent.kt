@@ -23,22 +23,15 @@
 *
 */
 
-package io.iamjosephmj.mvi_rx_clean.di.module
+package io.iamjosephmj.presentation.mvi.intents
 
-import androidx.lifecycle.ViewModelProviders
-import dagger.Module
-import dagger.Provides
-import io.iamjosephmj.mvi_rx_clean.di.ActivityScope
-import io.iamjosephmj.mvi_rx_clean.ui.base.BaseActivity
-import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
+import io.iamjosephmj.core.domain.SearchRequest
+import io.iamjosephmj.presentation.mvi.mvibase.MVIIntent
 
-@Module
-class ActivityModule(private val activity: BaseActivity<*>) {
-
-    @ActivityScope
-    @Provides
-    fun providesJobsViewModel(): JobsViewModel {
-        return ViewModelProviders.of(activity).get(JobsViewModel::class.java)
-    }
-
+/**
+ * This is the Intent for loading all jobs.
+ */
+sealed class GitHubLoadJobsIntent : MVIIntent {
+    data class GitHubLoadWithData(val searchRequest: SearchRequest) : GitHubLoadJobsIntent()
+    object ClearAllJobsGitHub : GitHubLoadJobsIntent()
 }

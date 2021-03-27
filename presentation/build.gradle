@@ -46,6 +46,8 @@ dependencies {
 
     implementation coreDependencies.rxKotlin
     implementation coreDependencies.ktx
+    implementation coreDependencies.rxJava
+
 
     // retrofit dependencies
     implementation networkDependencies.retrofit
