@@ -78,11 +78,11 @@ by <a href="https://staltz.com/">`Andre Staltz`</a>
   <img src="https://github.com/iamjosephmj/MVI-Clean-Rx/blob/main/images/user.jpg" />
 </p>
 
-On of the key insights within Cycle.js and the MVI pattern is adding the user into the structure of
+One of the key insights within Cycle.js and the MVI pattern is adding the user into the structure of
 the software. Much of the code we write in web and mobile are heavily user focused, as opposed to
 being processing-intensive. The code presents and interface that both accepts user inputs and shows
 resulting output. But the place the user in architectures like MVP and MVVM are not entirely
-transparent. In many ways, the user id kind of a view in those patterns. But in MVI, the user takes
+transparent. In many ways, the user is kind of a view in those patterns. But in MVI, the user takes
 a central role in terms of expressing their intents.
 
 ### Intents
