@@ -31,6 +31,8 @@ import io.reactivex.Single
 
 /**
  * This is the user action for fetching the jobs from github.
+ *
+ * @author Joseph James
  */
 class SearchForJobs(private val gitHubJobsRepository: GitHubJobsRepository) {
     operator fun invoke(searchRequest: SearchRequest): Single<List<GitHubJobDescription>> {

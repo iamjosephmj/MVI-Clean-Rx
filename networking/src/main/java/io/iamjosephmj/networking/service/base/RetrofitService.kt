@@ -37,6 +37,8 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Base Service class for retrofit.
+ *
+ * @author Joseph James
  */
 class RetrofitService {
     private lateinit var retrofit: Retrofit

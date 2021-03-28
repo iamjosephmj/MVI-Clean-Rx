@@ -28,6 +28,11 @@ package io.iamjosephmj.presentation.mvi.viewstate
 import io.iamjosephmj.core.domain.GitHubJobDescription
 import io.iamjosephmj.presentation.mvi.mvibase.MVIViewState
 
+/**
+ * This is the viewState for rendering purpose.
+ *
+ * @author Joseph James
+ */
 data class GitHubJobsViewState(
     val isLoading: Boolean,
     val jobList: List<GitHubJobDescription>,

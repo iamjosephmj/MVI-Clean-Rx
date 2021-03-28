@@ -25,4 +25,7 @@
 
 package io.iamjosephmj.presentation.mvi.mvibase
 
-interface  MVIResult
+/**
+ * @author Joseph James
+ */
+interface MVIResult

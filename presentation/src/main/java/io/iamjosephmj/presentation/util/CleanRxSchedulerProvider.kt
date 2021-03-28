@@ -23,12 +23,15 @@
 *
 */
 
-package io.iamjosephmj.clean.util
+package io.iamjosephmj.presentation.util
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * @author Joseph James
+ */
 class CleanRxSchedulerProvider : SchedulerProvider {
 
     override fun computation(): Scheduler = Schedulers.computation()

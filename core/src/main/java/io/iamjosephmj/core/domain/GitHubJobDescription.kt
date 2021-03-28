@@ -27,6 +27,9 @@ package io.iamjosephmj.core.domain
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * @author Joseph James
+ */
 @JsonClass(generateAdapter = true)
 data class GitHubJobDescription(
     @Json(name = "id") val id: String? = "",

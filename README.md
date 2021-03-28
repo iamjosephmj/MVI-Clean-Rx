@@ -31,8 +31,8 @@ better understanding of the `GithubJobsApp`.
     * [How to fit MVI in MVVM](#How-to-fit-MVI-in-MVVM)
 * [Insights on Sealed classes](#Insights-on-Sealed-classes)  
 * [How does Rx fit in MVI](#How-does-Rx-fit-in-MVI)  
-* [MVI base interfaces](#MVI-base-interfaces)  
-
+* [MVI base interfaces](#MVI-base-interfaces)
+* [Core Architecture Classes](#Core-Architecture-Classes)
 
 ## Introduction
 
@@ -187,3 +187,6 @@ interfaces for ViewModel and Views.
 * <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIViewModel.kt">`MVIViewModel`</a>
 * <a href ="https://github.com/iamjosephmj/MVI-Clean-Rx/tree/main/presentation/src/main/java/io/iamjosephmj/presentation/mvibase/MVIViewState.kt">`MVIViewState`</a>
 
+## Core Architecture Classes
+
+Please refer to this classes for more understanding.

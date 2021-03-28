@@ -49,8 +49,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * This is the Activity that displays the list of jobs.
+ *
+ * @author Joseph James
  */
-class JobsActivity : BaseActivity<JobsViewModel>(), MVIView<GitHubLoadJobsIntent, GitHubJobsViewState> {
+class JobsActivity : BaseActivity<JobsViewModel>(),
+    MVIView<GitHubLoadJobsIntent, GitHubJobsViewState> {
     //TODO : You can add a clear button and call the clear all intent to see the UI state change.
     lateinit var animationBuilder: SpruceBuilder
 
@@ -74,10 +77,13 @@ class JobsActivity : BaseActivity<JobsViewModel>(), MVIView<GitHubLoadJobsIntent
         swipeRefreshLayout.setOnRefreshListener {
             animateList = true
             loadJobsIntent.onNext(
-                GitHubLoadJobsIntent.GitHubLoadWithData( SearchRequest(
-                    domain = "Android",
-                    page = 1
-                )))
+                GitHubLoadJobsIntent.GitHubLoadWithData(
+                    SearchRequest(
+                        domain = "Android",
+                        page = 1
+                    )
+                )
+            )
         }
     }
 
@@ -150,7 +156,7 @@ class JobsActivity : BaseActivity<JobsViewModel>(), MVIView<GitHubLoadJobsIntent
     override fun render(state: GitHubJobsViewState) {
         when {
             state.isLoading -> {
-                if(!swipeRefreshLayout.isRefreshing) {
+                if (!swipeRefreshLayout.isRefreshing) {
                     loadingView.visibility = View.VISIBLE
                     jobsRecyclerView.visibility = View.INVISIBLE
                     errorView.visibility = View.INVISIBLE

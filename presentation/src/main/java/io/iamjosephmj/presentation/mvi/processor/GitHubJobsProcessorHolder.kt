@@ -25,7 +25,7 @@
 
 package io.iamjosephmj.presentation.mvi.processor
 
-import io.iamjosephmj.clean.util.SchedulerProvider
+import io.iamjosephmj.presentation.util.SchedulerProvider
 import io.iamjosephmj.core.domain.GitHubJobDescription
 import io.iamjosephmj.core.interactors.Interactors
 import io.iamjosephmj.presentation.mvi.action.GithubLoadJobsAction
@@ -33,25 +33,32 @@ import io.iamjosephmj.presentation.mvi.results.GitHubJobsResult
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 
+/**
+ * This class is responsible to convert the Actions to Result with the help of
+ * Rx and Repository.
+ *
+ * @author Joseph James
+ */
 class GitHubJobsProcessorHolder(
     private val interactors: Interactors,
     private val scheduleProvider: SchedulerProvider
 ) {
-    val loadAllJobs = ObservableTransformer<GithubLoadJobsAction.GithubLoadJobs, GitHubJobsResult> { action ->
-        action.flatMap {
-            interactors.searchForJobs(it.searchRequest)
-                .toObservable()
-                .map { jobsList ->
-                    GitHubJobsResult.LoadAllJobs.Success(jobsList)
-                }
-                .cast(GitHubJobsResult::class.java)
-                .onErrorReturn(GitHubJobsResult.LoadAllJobs::Error)
-                .subscribeOn(scheduleProvider.io())
-                .observeOn(scheduleProvider.ui())
-                .startWith(GitHubJobsResult.LoadAllJobs.Loading)
+    val loadAllJobs =
+        ObservableTransformer<GithubLoadJobsAction.GithubLoadJobs, GitHubJobsResult> { action ->
+            action.flatMap {
+                interactors.searchForJobs(it.searchRequest)
+                    .toObservable()
+                    .map { jobsList ->
+                        GitHubJobsResult.LoadAllJobs.Success(jobsList)
+                    }
+                    .cast(GitHubJobsResult::class.java)
+                    .onErrorReturn(GitHubJobsResult.LoadAllJobs::Error)
+                    .subscribeOn(scheduleProvider.io())
+                    .observeOn(scheduleProvider.ui())
+                    .startWith(GitHubJobsResult.LoadAllJobs.Loading)
 
+            }
         }
-    }
 
     val clearAllJobs = ObservableTransformer<GithubLoadJobsAction, GitHubJobsResult> { action ->
         action.flatMap {
@@ -68,12 +75,14 @@ class GitHubJobsProcessorHolder(
         }
     }
 
-    var actionProcessor =
+    var gitHubActionProcessor =
         ObservableTransformer<GithubLoadJobsAction, GitHubJobsResult> { action ->
             action.publish { shared ->
                 Observable.merge(
-                    shared.ofType(GithubLoadJobsAction.GithubLoadJobs::class.java).compose(loadAllJobs),
-                    shared.ofType(GithubLoadJobsAction.ClearAllJobsGithub::class.java).compose(clearAllJobs)
+                    shared.ofType(GithubLoadJobsAction.GithubLoadJobs::class.java)
+                        .compose(loadAllJobs),
+                    shared.ofType(GithubLoadJobsAction.ClearAllJobsGithub::class.java)
+                        .compose(clearAllJobs)
                 )
             }
         }

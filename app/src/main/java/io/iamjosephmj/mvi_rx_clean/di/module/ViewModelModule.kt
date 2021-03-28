@@ -27,12 +27,15 @@ package io.iamjosephmj.mvi_rx_clean.di.module
 
 import dagger.Module
 import dagger.Provides
-import io.iamjosephmj.clean.util.SchedulerProvider
+import io.iamjosephmj.presentation.util.SchedulerProvider
 import io.iamjosephmj.core.interactors.Interactors
 import io.iamjosephmj.presentation.mvi.intents.GitHubLoadJobsIntent
 import io.iamjosephmj.presentation.mvi.processor.GitHubJobsProcessorHolder
 import io.reactivex.subjects.PublishSubject
 
+/**
+ * @author Joseph James
+ */
 @Module
 class ViewModelModule {
 

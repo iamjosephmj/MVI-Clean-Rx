@@ -24,6 +24,9 @@
 */
 package io.iamjosephmj.core.domain
 
+/**
+ * @author Joseph James
+ */
 data class SearchRequest(
     /* page number of the jobs api */
     val page: Int,

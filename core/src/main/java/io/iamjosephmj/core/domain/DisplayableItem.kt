@@ -1,4 +1,6 @@
 package io.iamjosephmj.core.domain
 
-interface DisplayableItem {
-}
+/**
+ * @author Joseph James
+ */
+interface DisplayableItem

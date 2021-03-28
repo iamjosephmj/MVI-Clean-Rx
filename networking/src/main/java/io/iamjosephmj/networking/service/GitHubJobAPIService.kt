@@ -34,6 +34,8 @@ import retrofit2.Response
 
 /**
  * This is the API service class.
+ *
+ * @author Joseph James
  */
 class GitHubJobAPIService(retrofitService: RetrofitService) {
 

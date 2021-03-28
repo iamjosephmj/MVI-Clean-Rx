@@ -25,11 +25,14 @@
 
 package io.iamjosephmj.mvi_rx_clean.di.component
 
+import dagger.Component
 import io.iamjosephmj.mvi_rx_clean.di.ActivityScope
 import io.iamjosephmj.mvi_rx_clean.di.module.ActivityModule
-import dagger.Component
 import io.iamjosephmj.mvi_rx_clean.ui.screens.JobsActivity
 
+/**
+ * @author Joseph James
+ */
 @ActivityScope
 @Component(
     dependencies = [ApplicationComponent::class],

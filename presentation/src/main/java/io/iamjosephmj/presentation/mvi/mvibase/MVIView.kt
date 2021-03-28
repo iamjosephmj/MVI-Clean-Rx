@@ -27,6 +27,9 @@ package io.iamjosephmj.presentation.mvi.mvibase
 
 import io.reactivex.Observable
 
+/**
+ * @author Joseph James
+ */
 interface MVIView<I : MVIIntent, S : MVIViewState> {
     /**
      * Intents from the ViewModel

@@ -28,16 +28,18 @@ package io.iamjosephmj.mvi_rx_clean.di.component
 import android.app.Application
 import android.content.Context
 import dagger.Component
+import io.iamjosephmj.presentation.util.SchedulerProvider
+import io.iamjosephmj.core.data.repo.GitHubJobsRepository
+import io.iamjosephmj.core.interactors.Interactors
 import io.iamjosephmj.mvi_rx_clean.application.MVIRxCleanApplication
 import io.iamjosephmj.mvi_rx_clean.di.ApplicationContext
 import io.iamjosephmj.mvi_rx_clean.di.module.ApplicationModule
-import io.iamjosephmj.clean.util.SchedulerProvider
-import io.iamjosephmj.core.data.repo.GitHubJobsRepository
-import io.iamjosephmj.core.interactors.Interactors
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
-
+/**
+ * @author Joseph James
+ */
 @Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {

@@ -41,6 +41,8 @@ import javax.inject.Inject
 
 /**
  * This ViewModel is specifically used for implementing the jobsFetch-display operations in this project.
+ *
+ * @author Joseph James
  */
 class JobsViewModel : BaseViewModel(), MVIViewModel<GitHubLoadJobsIntent, GitHubJobsViewState> {
 
@@ -55,14 +57,24 @@ class JobsViewModel : BaseViewModel(), MVIViewModel<GitHubLoadJobsIntent, GitHub
     private fun compose(): Observable<GitHubJobsViewState> {
         return intentSubjectsGitHub
 //            .compose(intentFilter)
+            // Mapping the action
             .map(this::actionFromIntent)
-            .compose(actionProcessorHolder.actionProcessor)
+            // Linking the repo
+            .compose(actionProcessorHolder.gitHubActionProcessor)
+            // This is like reduce, but gives result in every state.
             .scan(GitHubJobsViewState.default(), reducer)
+            // emits different state.
             .distinctUntilChanged()
+            // Holds one state.
             .replay(1)
+            // Emits the value from the moment it is subscribed.
             .autoConnect(0)
     }
 
+    /**
+     * you can apply filters to the observables.
+     * ** This function is not presently in use.
+     */
     private val intentFilterGitHub: ObservableTransformer<GitHubLoadJobsIntent, GitHubLoadJobsIntent>
         get() = ObservableTransformer { intents ->
             intents.publish { shared ->
@@ -74,9 +86,14 @@ class JobsViewModel : BaseViewModel(), MVIViewModel<GitHubLoadJobsIntent, GitHub
             }
         }
 
+    /**
+     * This function maps the Action from a certain intent.
+     */
     private fun actionFromIntent(intentGitHub: GitHubLoadJobsIntent): GithubLoadJobsAction {
         return when (intentGitHub) {
-            is GitHubLoadJobsIntent.GitHubLoadWithData -> GithubLoadJobsAction.GithubLoadJobs(intentGitHub.searchRequest)
+            is GitHubLoadJobsIntent.GitHubLoadWithData -> GithubLoadJobsAction.GithubLoadJobs(
+                intentGitHub.searchRequest
+            )
             is GitHubLoadJobsIntent.ClearAllJobsGitHub -> GithubLoadJobsAction.ClearAllJobsGithub
         }
     }
@@ -88,14 +105,24 @@ class JobsViewModel : BaseViewModel(), MVIViewModel<GitHubLoadJobsIntent, GitHub
     override fun onStart() {
     }
 
-    override fun processIntent(intentGitHub: Observable<GitHubLoadJobsIntent>) {
-        intentGitHub.subscribe(intentSubjectsGitHub)
+    /**
+     * This is the connection point from an activity.
+     */
+    override fun processIntent(intent: Observable<GitHubLoadJobsIntent>) {
+        intent.subscribe(intentSubjectsGitHub)
 
     }
 
+    /**
+     * This is observed from UI to set values in the view.
+     */
     override fun states(): Observable<GitHubJobsViewState> = stateObservable
 
     companion object {
+        /*
+         * This is the most important part of MVI, This reducer infers the new state
+         * from the previously know states and the new Result from the ActionProcessor.
+         */
         private val reducer =
             BiFunction { previousViewState: GitHubJobsViewState, result: GitHubJobsResult ->
                 when (result) {

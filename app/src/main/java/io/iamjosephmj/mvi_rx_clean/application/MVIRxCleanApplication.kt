@@ -33,6 +33,7 @@ import io.iamjosephmj.mvi_rx_clean.di.module.ApplicationModule
 /**
  * This is the application class, helps us to do DI.
  *
+ * @author Joseph James
  */
 class MVIRxCleanApplication : Application() {
 

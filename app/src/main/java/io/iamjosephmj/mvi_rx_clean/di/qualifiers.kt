@@ -27,6 +27,9 @@ package io.iamjosephmj.mvi_rx_clean.di
 
 import javax.inject.Qualifier
 
+/**
+ * @author Joseph James
+ */
 @Qualifier
 @Retention(AnnotationRetention.SOURCE)
 annotation class ApplicationContext

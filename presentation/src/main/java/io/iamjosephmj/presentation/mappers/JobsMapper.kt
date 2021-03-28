@@ -30,7 +30,9 @@ import io.reactivex.functions.Function
 import retrofit2.Response
 
 /**
- * This is a mapper class for the job response
+ * This is a mapper class for the job response.
+ *
+ * @author Joseph James
  */
 class JobsMapper :
     Function<Response<List<GitHubJobDescription>>, List<GitHubJobDescription>> {

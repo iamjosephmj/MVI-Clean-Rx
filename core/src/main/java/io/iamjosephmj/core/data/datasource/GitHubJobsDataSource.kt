@@ -28,6 +28,9 @@ import io.iamjosephmj.core.domain.GitHubJobDescription
 import io.iamjosephmj.core.domain.SearchRequest
 import io.reactivex.Single
 
+/**
+ * @author Joseph James
+ */
 interface GitHubJobsDataSource {
     /**
      * This method is used to fetch a paginated list of jobs posted in github

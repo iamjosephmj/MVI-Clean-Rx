@@ -29,7 +29,11 @@ import io.iamjosephmj.core.domain.SearchRequest
 import io.iamjosephmj.presentation.mvi.mvibase.MVIIntent
 
 /**
- * This is the Intent for loading all jobs.
+ * This is the Intent for :
+ * 1. Fetching the Job list from the Repo
+ * 2. Clearing all data from UI.
+ *
+ * @author Joseph James
  */
 sealed class GitHubLoadJobsIntent : MVIIntent {
     data class GitHubLoadWithData(val searchRequest: SearchRequest) : GitHubLoadJobsIntent()

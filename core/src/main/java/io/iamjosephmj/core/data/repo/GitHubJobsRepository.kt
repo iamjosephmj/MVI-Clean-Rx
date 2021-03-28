@@ -31,6 +31,8 @@ import io.reactivex.Single
 
 /**
  *  Provides methods for accessing the data that delegate to {@link GitHubJobsDataSource}
+ *
+ * @author Joseph James
  */
 class GitHubJobsRepository(private val gitHubJobsDataSource: GitHubJobsDataSource) {
     /**

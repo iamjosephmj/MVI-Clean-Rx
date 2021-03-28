@@ -25,4 +25,7 @@
 
 package io.iamjosephmj.presentation.mvi.mvibase
 
+/**
+ * @author Joseph James
+ */
 interface MVIViewState

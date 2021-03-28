@@ -28,6 +28,13 @@ package io.iamjosephmj.presentation.mvi.action
 import io.iamjosephmj.core.domain.SearchRequest
 import io.iamjosephmj.presentation.mvi.mvibase.MVIAction
 
+/**
+ * This Action class for:
+ * 1. Fetching the Job list from the Repo
+ * 2. Clearing all data from UI.
+ *
+ * @author Joseph James
+ */
 sealed class GithubLoadJobsAction : MVIAction {
     data class GithubLoadJobs(val searchRequest: SearchRequest) : GithubLoadJobsAction()
     object ClearAllJobsGithub : GithubLoadJobsAction()

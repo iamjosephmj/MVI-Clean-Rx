@@ -35,6 +35,8 @@ import javax.inject.Inject
 
 /**
  * This is the base viewModel class, mainly used for DI.
+ *
+ * @author Joseph James
  */
 abstract class BaseViewModel : ViewModel() {
 

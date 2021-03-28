@@ -28,6 +28,9 @@ package io.iamjosephmj.presentation.mvi.results
 import io.iamjosephmj.core.domain.GitHubJobDescription
 import io.iamjosephmj.presentation.mvi.mvibase.MVIResult
 
+/**
+ * This class represents the results that are produced by the Processor.
+ */
 sealed class GitHubJobsResult : MVIResult {
     sealed class LoadAllJobs : GitHubJobsResult() {
         object Loading : LoadAllJobs()

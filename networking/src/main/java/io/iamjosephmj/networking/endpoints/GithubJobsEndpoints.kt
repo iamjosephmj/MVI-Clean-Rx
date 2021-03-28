@@ -27,6 +27,8 @@ package io.iamjosephmj.networking.endpoints
 
 /**
  * This class contains endpoints for fetching the jobs.
+ *
+ * @author Joseph James
  */
 object GithubJobsEndpoints {
     const val JOBS_ENDPOINT = "/positions.json"

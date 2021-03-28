@@ -33,7 +33,9 @@ import io.iamjosephmj.core.domain.GitHubJobDescription
 import io.iamjosephmj.mvi_rx_clean.R
 import kotlinx.android.synthetic.main.item_job.*
 
-
+/**
+ * @author Joseph James
+ */
 val jobsAdapter = ListDelegationAdapter(
     jobsAdapterDelegate()
 )

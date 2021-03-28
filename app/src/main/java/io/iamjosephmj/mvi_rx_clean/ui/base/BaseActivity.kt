@@ -38,6 +38,7 @@ import javax.inject.Inject
 /**
  * This class represents the base class for all activities.
  *
+ * @author Joseph James
  */
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 

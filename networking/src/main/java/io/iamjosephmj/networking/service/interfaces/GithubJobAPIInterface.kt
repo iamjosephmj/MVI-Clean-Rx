@@ -34,6 +34,8 @@ import retrofit2.http.Query
 
 /**
  * This is the API endpoints interface class.
+ *
+ * @author Joseph James
  */
 interface GithubJobAPIInterface {
 

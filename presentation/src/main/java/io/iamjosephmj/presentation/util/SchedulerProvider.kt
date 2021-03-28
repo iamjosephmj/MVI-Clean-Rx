@@ -23,10 +23,13 @@
 *
 */
 
-package io.iamjosephmj.clean.util
+package io.iamjosephmj.presentation.util
 
 import io.reactivex.Scheduler
 
+/**
+ * @author Joseph James
+ */
 interface SchedulerProvider {
 
     fun computation(): Scheduler

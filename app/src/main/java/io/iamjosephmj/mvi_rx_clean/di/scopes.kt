@@ -27,6 +27,9 @@ package io.iamjosephmj.mvi_rx_clean.di
 
 import javax.inject.Scope
 
+/**
+ * @author Joseph James
+ */
 @Scope
 @Retention(AnnotationRetention.SOURCE)
 annotation class ActivityScope

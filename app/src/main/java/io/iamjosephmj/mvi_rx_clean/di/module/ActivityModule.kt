@@ -32,6 +32,9 @@ import io.iamjosephmj.mvi_rx_clean.di.ActivityScope
 import io.iamjosephmj.mvi_rx_clean.ui.base.BaseActivity
 import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
 
+/**
+ * @author Joseph James
+ */
 @Module
 class ActivityModule(private val activity: BaseActivity<*>) {
 

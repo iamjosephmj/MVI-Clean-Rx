@@ -35,6 +35,8 @@ import io.reactivex.Single
 /**
  * This is the implementation class for abstract datasource that we had mentioned as
  * {@link GitHubJobsDataSource}
+ *
+ * @author Joseph James
  */
 class GitHubJobsDataSourceImpl(private val gitHubJobAPIService: GitHubJobAPIService) :
     GitHubJobsDataSource {

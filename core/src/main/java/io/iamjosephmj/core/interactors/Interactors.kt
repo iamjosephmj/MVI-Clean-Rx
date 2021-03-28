@@ -28,6 +28,8 @@ package io.iamjosephmj.core.interactors
 /**
  * This class is for providing sources. This will specifically be useful at the time of DI as
  * I mentioned in the doc.
+ *
+ * @author Joseph James
  */
 data class Interactors(
     val searchForJobs: SearchForJobs

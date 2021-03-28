@@ -30,6 +30,9 @@ import io.iamjosephmj.mvi_rx_clean.di.ViewModelScope
 import io.iamjosephmj.mvi_rx_clean.di.module.ViewModelModule
 import io.iamjosephmj.mvi_rx_clean.ui.viewmodels.JobsViewModel
 
+/**
+ * @author Joseph James
+ */
 @ViewModelScope
 @Component(
     dependencies = [ApplicationComponent::class],
