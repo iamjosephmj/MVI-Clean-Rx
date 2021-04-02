@@ -141,7 +141,7 @@ passed along to the view of the app which renders the state for the display to t
 state is completely immutable. ie. It is never updated, but instead, it is just recalculated and
 passed along to the view for rendering.
 
-" ON OF THE MAJOR SOURCES OF THE BUGS IN ANY KIND OF MOBILE DEVELOPMENT IS MUTABLE STATE " - Joseph James (that's
+" ONE OF THE MAJOR SOURCES OF THE BUGS IN ANY KIND OF MOBILE DEVELOPMENT IS MUTABLE STATE " - Joseph James (that's
 me :) )
 
 So, by using Immutable state in this way in MVI, you have eliminated the source of many possible
